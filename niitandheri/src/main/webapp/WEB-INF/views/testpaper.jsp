@@ -83,10 +83,10 @@
 			<div class="col-md-6 col-sm-6 col-xs-12 text-center">
 				<form:label path="answer">Correct Answer</form:label>
 				<form:select path="answer"  class="form-control">
-				<form:option value="answer">1</form:option>
-				<form:option value="answer">2</form:option>
-				<form:option value="answer">3</form:option>
-				<form:option value="answer">4</form:option>
+				<form:option value="1">1</form:option>
+				<form:option value="2">2</form:option>
+				<form:option value="3">3</form:option>
+				<form:option value="4">4</form:option>
 				
 				</form:select>
 			</div>

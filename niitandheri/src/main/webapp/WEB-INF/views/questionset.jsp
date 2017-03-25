@@ -13,8 +13,12 @@
 	
 	<div class="row">
 	<div class="col-md-10">
-	<form:radiobutton path="noOfAttempts{{$index}}.attemptedAnswer" value="1" />{{m.option1}}
-	<%-- <form:radiobutton path="noOfAttempts["+{{$index}}+"].attemptedAnswer" value="2" />{{m.option2}}
+	<input type="radio" name="noOfAttempts[{{$index}}].attemptedAnswer" value="1">{{m.option1}}
+	<input type="radio" name="noOfAttempts[{{$index}}].attemptedAnswer" value="2">{{m.option2}}
+	<input type="radio" name="noOfAttempts[{{$index}}].attemptedAnswer" value="3">{{m.option3}}
+	<input type="radio" name="noOfAttempts[{{$index}}].attemptedAnswer" value="4">{{m.option4}}
+	<%-- <form:radiobutton path="noOfAttempts[0].attemptedAnswer" value="1" />{{m.option1}}
+	<form:radiobutton path="noOfAttempts["+{{$index}}+"].attemptedAnswer" value="2" />{{m.option2}}
 	<form:radiobutton path="noOfAttempts["+{{$index}}+"].attemptedAnswer" value="3" />{{m.option3}}
 	<form:radiobutton path="noOfAttempts["+{{$index}}+"].attemptedAnswer" value="4" />{{m.option4}} --%>
 	</div>	
@@ -22,6 +26,10 @@
 	
 	<div class="row">
 	<div class="col-md-10">
+	<input type="text" name="noOfAttempts[{{$index}}].correctAnswer" value="{{m.answer}}" />
+	<input type="text" name="noOfAttempts[{{$index}}].testPaperId" value="{{m.testPaperId}}" />
+	<input type="text" name="noOfAttempts[{{$index}}].question" value="{{m.question}}" />
+	
 	
 	<%-- <form:input type="text" path="correctAnswer" value="{{m.answer}}" />
 	<form:input type="text" path="testPaperId" value="{{m.testPaperId}}" />
