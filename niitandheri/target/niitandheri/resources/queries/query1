@@ -1,0 +1,31 @@
+create table course (
+courseId varchar(10) constraint course_pk primary key,
+courseName varchar(50)
+)
+
+insert into course values ('CR001','C');
+insert into course values ('CR002','C++');
+insert into course values ('CR003','C#');
+insert into course values ('CR004','HTML5');
+insert into course values ('CR005','Core JAVA');
+insert into course values ('CR006','JSP & Servlets');
+insert into course values ('CR007','Spring MVC');
+insert into course values ('CR008','Tally');
+insert into course values ('CR009','Advance Excel');
+insert into course values ('CR010','MS Office');
+insert into course values ('CR011','MS Word');
+insert into course values ('CR012','MS Excel');
+insert into course values ('CR013','MS PowerPoint');
+insert into course values ('CR014','RWD');
+insert into course values ('CR015','Oracle-SQL');
+insert into course values ('CR016','SQL Server-2012');
+insert into course values ('CR017','Orale PL-SQL');
+insert into course values ('CR017','Orale PL-SQL');
+
+select * from course
+
+create table TestPaperSyllabus (
+TestPaperSyllabusId varchar(10) constraint testpaper_syllabus_pk primary key,
+ courseId  varchar(10) constraint testpaper_fk references course(courseId),
+TestPaperSyllabusContent varchar(50)
+)

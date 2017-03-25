@@ -1,0 +1,12 @@
+com\niit\controller\UserController.class
+com\niit\dao\StudentDAO.class
+com\niit\model\Student.class
+com\niit\model\QuestionsAttempt.class
+com\niit\model\Course.class
+com\niit\model\TestAttempt.class
+com\niit\model\TestPaper.class
+com\niit\config\TestPaperSyllabusGenerator.class
+com\niit\model\TestPaperSyllabus.class
+com\niit\controller\MainController.class
+com\niit\dao\TestPaperSyllabusDAO.class
+com\niit\controller\UniversalController.class

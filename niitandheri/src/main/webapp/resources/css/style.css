@@ -1,0 +1,84 @@
+.navbar-default {
+  background-color: #ecf0f1;
+  border: 2px solid #0800ff;
+}
+.navbar-default .navbar-brand {
+  color: #ecf0f1;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #0800ff;
+}
+.navbar-default .navbar-text {
+  color: #002247;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #002247;
+
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #ecf0f1;
+  background-color: #0800ff;
+  
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #0f4502;
+  background-color: #5bc0de;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  color: #0f4502;
+  background-color: #5bc0de;
+}
+.navbar-default .navbar-toggle {
+  border-color: #5bc0de;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #5bc0de;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #002247;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: #002247;
+}
+.navbar-default .navbar-link {
+  color: #ecf0f1;
+}
+.navbar-default .navbar-link:hover {
+  color: #0f4502;
+}
+.dropdown-menu > li > a:hover{
+	color: #002247;
+	font-weight:bold;
+  background-color: #005cc4;  
+  }
+
+ @media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #002247;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #002247;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #002247;
+    background-color: #5bc0de;
+  }
+  
+
+}
+@media (min-width: 768px) {
+  ul.nav li:hover > ul.dropdown-menu {
+    display: block;
+  }
+  
