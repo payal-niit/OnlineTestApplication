@@ -9,12 +9,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.google.gson.annotations.Expose;
 @Entity
 public class TestPaperSyllabus {
 	@Id
-	@Column(name = "testPaperSyllabusId", unique = true, nullable = false, length = 20)
+	@GenericGenerator(name="seq_id", strategy="com.niit.config.TestPaperSyllabusGenerator")
+	@GeneratedValue(generator="seq_id")
+	@Column(name = "testPaperSyllabusId", unique = true, nullable = false)
+	@Expose
 	private String testPaperSyllabusId;
-	@Column(name = "courseId", length = 10)
+	
+	@Column(name = "courseId")
 	private String courseId;
 	private String testPaperSyllabusContent;
 	

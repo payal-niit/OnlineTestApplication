@@ -4,36 +4,45 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-public class Student {
-	
+public class Student {	
 	@Id
+	@NotEmpty(message="Student ID cannot be empty")
 	private String studentId;
+	
+	@Size(min=6,max=15,message="Minimum length required is 6")	
 	private String password;
+	@NotEmpty(message="FirstName cannot be empty")
 	private String fname;
+	
+	@NotEmpty(message="LastName cannot be empty")
 	private String lname;
-	private char enabled;	
+	private int enabled;	
 	private String dob;	
 	private String role;
-
+	
+	public Student() {
+		enabled=1;
+		role="ROLE_STUDENT";
+	}
+	
 	public String getRole() {
 		return role;
 	}
 
 	public void setRole(String role) {
 		this.role = role;
-	}
+	}	
 
-	public char getEnabled() {
+	public int getEnabled() {
 		return enabled;
 	}
 
-	public char isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(char enabled) {
+	public void setEnabled(int enabled) {
 		this.enabled = enabled;
 	}
 

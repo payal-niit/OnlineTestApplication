@@ -2,19 +2,27 @@ package com.niit.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.annotations.Expose;
 
 @Entity
 public class TestPaper {
 	@Id
+	@GenericGenerator(name="seq_id", strategy="com.niit.config.TestPaperGenerator")
+	@GeneratedValue(generator="seq_id")
+	@Column(name = "testPaperId", unique = true, nullable = false)
 	@Expose
 	private String testPaperId;
-	@Lob
+	
 	@Expose
 	private String question;
 	@Expose
@@ -27,15 +35,31 @@ public class TestPaper {
 	private String option4;
 	@Expose
 	private String answer;
+	@Expose
+	private int marks;
+	@Transient
+	private MultipartFile testPaperImage;	
 	
-	@Column(length=20)
+	public MultipartFile getTestPaperImage() {
+		return testPaperImage;
+	}
+	public void setTestPaperImage(MultipartFile testPaperImage) {
+		this.testPaperImage = testPaperImage;
+	}
+	public int getMarks() {
+		return marks;
+	}
+	public void setMarks(int marks) {
+		this.marks = marks;
+	}
+	
 	private String testPaperSyllabusId;
 	@ManyToOne
 	@JoinColumn(name="testPaperSyllabusId",nullable=false, insertable=false, updatable=false)
 	private TestPaperSyllabus testPaperSyllabus;
 	
 	
-	@Column(name = "courseId", length = 10)
+	@Column(name = "courseId")
 	private String courseId;
 	@ManyToOne
 	@JoinColumn(name="courseId",nullable=false, insertable=false, updatable=false)

@@ -1,5 +1,5 @@
 <%@ include file="header.jsp" %>
-<form:form commandName="testPaper" action="addtestpaper">
+<form:form commandName="testPaper" action="addtestpaper" enctype="multipart/form-data">
 	<div class="col-md-10 text-center"
 		style="padding: 15px; padding-top: 0px; margin-left: 100px; text-align: center; border: 5px solid grey; border-top-right-radius: 20px; border-bottom-color: #0800ff; border-right-color: #0800ff;"
 		align="center">
@@ -80,6 +80,16 @@
 			
 			<div class="row text-center" align="center">
 
+			<div class="col-md-6 col-sm-12 col-xs-12 text-center">
+			<form:label path="testPaperImage">Add Image if required</form:label>
+				<form:input type="file" rows="2" path="testPaperImage"
+					class="form-control" />
+			
+			</div>
+			</div>
+			
+			<div class="row text-center" align="center">
+
 			<div class="col-md-6 col-sm-6 col-xs-12 text-center">
 				<form:label path="answer">Correct Answer</form:label>
 				<form:select path="answer"  class="form-control">
@@ -90,7 +100,12 @@
 				
 				</form:select>
 			</div>
-			<div class="col-md-6 col-sm-6 col-xs-12 text-center">
+			<div class="col-md-2 col-sm-3 col-xs-12 text-center">
+			<form:label path="marks">Marks</form:label>
+				<form:input rows="2" path="marks"
+					placeholder="Marks" class="form-control" />
+			</div>
+			<div class="col-md-4 col-sm-3 col-xs-12 text-center">
 			<br>
 				<input type="Submit" value="Create Question" class="btn btn-primary">				
 			</div>

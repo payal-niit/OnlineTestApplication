@@ -6,6 +6,10 @@ import java.util.Set;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +26,13 @@ public class TestPaperSyllabusDAO {
 	
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	/*-----------------------For Course--------------------------------------*/
+	
+	@Transactional
+	public void addCourse(Course course) {
+		sessionFactory.getCurrentSession().saveOrUpdate(course);
+	}
 	
 	/*-----------------------For Test Paper Syllabus--------------------------------*/
 	
@@ -53,7 +64,7 @@ public class TestPaperSyllabusDAO {
 	{
 		Session session = sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
-		List<TestPaperSyllabus> list = session.createQuery("from TestPaperSyllabus").list();
+		List<TestPaperSyllabus> list = session.createQuery("from TestPaperSyllabus ORDER BY testPaperSyllabusId").list();
 		int count = list.size();
 		return count;
 	}
@@ -179,6 +190,32 @@ public class TestPaperSyllabusDAO {
 	}
 	
 	@Transactional
+	public List<TestPaper> generateQuestionPaperByJSTL(String testPaperSyllabusId) {
+		String hql="select * FROM (select * from TestPaper order by dbms_random.value) where rownum < 2 and testPaperSyllabusId = "+"'"+testPaperSyllabusId+"'";
+		Query q = sessionFactory.getCurrentSession().createQuery("from TestPaper where testPaperSyllabusId = "+"'"+testPaperSyllabusId+"'");
+		List<TestPaper>list = q.list();
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		String data = gson.toJson(list);
+		return list;
+	}
+	
+	/*@Transactional
+	public List<TestPaper> generateQuestionPaperByJSTL(String testPaperSyllabusId) {
+		List<TestPaper>list = sessionFactory.getCurrentSession().createQuery("from TestPaper where testPaperSyllabusId = "+"'"+testPaperSyllabusId+"' order by rand()").setMaxResults(2).list();
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		String data = gson.toJson(list);
+		return list;
+	}*/
+	
+	@Transactional
+	public TestPaper generateTestPaperById(String testPaperId) {
+		List<TestPaper>list = sessionFactory.getCurrentSession().createQuery("from TestPaper where testPaperId = "+"'"+testPaperId+"'").list();
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		String data = gson.toJson(list);
+		return list.get(0);
+	}
+	
+	@Transactional
 	public TestPaper getQuestionById(String testPaperId) {
 		List<TestPaper>list = sessionFactory.getCurrentSession().createQuery("from TestPaper where testPaperId = "+"'"+testPaperId+"'").list();
 		
@@ -234,6 +271,44 @@ public class TestPaperSyllabusDAO {
 		}
 		return id;
 	}
+	@Transactional
+	public void addTestAttemptDetails(TestAttempt testAttempt) {
+		sessionFactory.getCurrentSession().saveOrUpdate(testAttempt);
+	}
 	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public TestPaper getOptions(String testPaperId) {
+		List<TestPaper> list=sessionFactory.getCurrentSession().createCriteria(TestPaper.class).setProjection(Projections.distinct(Projections.projectionList()
+				.add(Projections.property("option1"),"option1")
+				.add(Projections.property("option2"),"option2")
+				.add(Projections.property("option3"),"option3")
+				.add(Projections.property("option4"),"option4")				
+				)).add(Restrictions.eq("testPaperId", testPaperId))
+				.setResultTransformer(Transformers.aliasToBean(TestPaper.class))
+				.list();
+		return list.get(0);
+	}
+	@Transactional
+	public String getAttemptedTestDetails(String testAttemptId) {
+		List<QuestionsAttempt> list = sessionFactory.getCurrentSession().createQuery("from QuestionsAttempt where testAttemptId = "+"'"+testAttemptId+"'").list();
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		String data = gson.toJson(list);
+		return data;
+	}
 	
+	@Transactional
+	public List<QuestionsAttempt> getAttemptedTestDetailsByJSTL(String testAttemptId) {
+		List<QuestionsAttempt> list = sessionFactory.getCurrentSession().createQuery("from QuestionsAttempt where testAttemptId = "+"'"+testAttemptId+"'").list();
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		String data = gson.toJson(list);
+		return list;
+	}
+
+	@Transactional
+	public TestAttempt getAttemptedTest(String testAttemptId) {
+		List<TestAttempt> list = sessionFactory.getCurrentSession().createQuery("from TestAttempt where testAttemptId = "+"'"+testAttemptId+"'").list();
+		
+		return list.get(0);
+	}
 }

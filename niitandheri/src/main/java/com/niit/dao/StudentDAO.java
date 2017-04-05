@@ -17,7 +17,7 @@ public class StudentDAO {
 	
 	@Transactional
 	public void addUser(Student student) {
-		sessionFactory.getCurrentSession().saveOrUpdate(student);
+		sessionFactory.getCurrentSession().save(student);
 	}
 	
 	@Transactional
@@ -25,6 +25,13 @@ public class StudentDAO {
 		List<Student>list = sessionFactory.getCurrentSession().createQuery("from Student where studentId = "+"'"+studentId+"'").list();
 		
 		return list.get(0);
+	}
+	
+	@Transactional
+	public List<Student> getStudents() {
+		List<Student>list = sessionFactory.getCurrentSession().createQuery("from Student").list();
+		
+		return list;
 	}
 
 }

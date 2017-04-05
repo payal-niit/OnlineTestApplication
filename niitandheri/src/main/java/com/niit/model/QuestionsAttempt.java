@@ -2,30 +2,75 @@ package com.niit.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
+import com.google.gson.annotations.Expose;
 
 @Entity
 public class QuestionsAttempt {
 	@Id
+	@GenericGenerator(name="seq_id", strategy="com.niit.config.QuestionsAttemptGenerator")
+	@GeneratedValue(generator="seq_id")
+	@Column(name = "questionsAttemptId", unique = true, nullable = false)
 	private String questionsAttemptId;
+	@Expose
 	private String testPaperId;
+	@Expose
 	private String question;
+	@Expose
 	private String attemptedAnswer;
+	@Expose
 	private String correctAnswer;
+	@Expose
 	private String studentId;
-	@DateTimeFormat(pattern="dd/MM/yyyy")
+	@Column(columnDefinition="date")
 	private Date dateOfAttempt;
-	@DateTimeFormat(pattern="hh:mm:ss")
+	@Column(columnDefinition="timestamp")
 	private Date timeOfAttempt;
-	
+	private int marks;	
+	private String testAttemptId;
 	
 	@ManyToOne
+	@JoinColumn(name="testAttemptId", insertable=false, updatable=false, nullable=true)
+	@Expose
+	private TestAttempt testAttempt;
+	
+	public String getTestAttemptId() {
+		return testAttemptId;
+	}
+
+	public void setTestAttemptId(String testAttemptId) {
+		this.testAttemptId = testAttemptId;
+	}
+
+	public TestAttempt getTestAttempt() {
+		return testAttempt;
+	}
+
+	public void setTestAttempt(TestAttempt testAttempt) {
+		this.testAttempt = testAttempt;
+	}
+
+	public int getMarks() {
+		return marks;
+	}
+
+	public void setMarks(int marks) {
+		this.marks = marks;
+	}
+
+	@ManyToOne
 	@JoinColumn(name="testPaperId",nullable=false, insertable=false, updatable=false)
+	@Expose
 	private TestPaper testPaper;
 	
 	@ManyToOne

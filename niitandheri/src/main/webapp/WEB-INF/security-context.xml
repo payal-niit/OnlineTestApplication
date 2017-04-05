@@ -10,7 +10,7 @@
       <authentication-manager alias="authenticationManager">
      		<authentication-provider>
      			<jdbc-user-service data-source-ref="dataSource"
-     			users-by-username-query="select studentId, password, 'true' as Enabled from Student where studentId=?"
+     			users-by-username-query="select studentId, password, enabled from Student where studentId=?"
      			authorities-by-username-query="select studentId,role from Student where studentId=?" />
      		</authentication-provider>
      	</authentication-manager>
@@ -18,8 +18,8 @@
 	      <http auto-config='true'>
 	      	<csrf disabled="true"/>
 	      	<access-denied-handler error-page="/403" />
-      		 <intercept-url pattern="/" access="permitAll" />
-      		 <intercept-url pattern="/profile" access="isAuthenticated()"/>
+      		 <!-- <intercept-url pattern="/" access="permitAll" />
+      		 <intercept-url pattern="/profile" access="isAuthenticated()"/> -->
       		 <form-login login-page="/" default-target-url="/" authentication-failure-url="/?error" login-processing-url="/perform_login" username-parameter="studentId"
             password-parameter="password"/>
       		<logout logout-success-url="/perform_logout" invalidate-session="true" delete-cookies="JSESSIONID"/>
